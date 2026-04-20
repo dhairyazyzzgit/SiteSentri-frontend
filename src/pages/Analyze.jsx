@@ -127,7 +127,7 @@ const Analyze = () => {
     setProgress(6);
 
     try {
-      const response = await fetch("http://localhost:5000/api/analyze", {
+      const response = await fetch("https://sitesentri-backend.onrender.com/api/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
