@@ -696,7 +696,23 @@ const Analyze = () => {
                   <div style={styles.aiLabel}>AI Verdict</div>
                   <div style={styles.aiText}>{aiVerdict}</div>
                 </div>
+<div style={styles.metaInfoRow}>
+  {typeof result.domainAge === "number" && (
+    <div style={styles.metaInfoCard}>
+      <div style={styles.metaInfoLabel}>Domain Registration Age</div>
+      <div style={styles.metaInfoValue}>{result.domainAge} days</div>
+    </div>
+  )}
 
+  {result.createdDate && (
+    <div style={styles.metaInfoCard}>
+      <div style={styles.metaInfoLabel}>Registered On</div>
+      <div style={styles.metaInfoValue}>
+        {new Date(result.createdDate).toLocaleDateString()}
+      </div>
+    </div>
+  )}
+</div>
                 <div style={styles.reasonGrid}>
                   {result.reasons?.map((reason, index) => (
                     <div key={index} className="sa-reason">
@@ -714,6 +730,31 @@ const Analyze = () => {
 };
 
 const styles = {
+  metaInfoRow: {
+  marginTop: 18,
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: 12,
+},
+metaInfoCard: {
+  borderRadius: 18,
+  padding: 16,
+  background: "rgba(255,255,255,0.045)",
+  border: "1px solid rgba(255,255,255,0.07)",
+},
+metaInfoLabel: {
+  color: "rgba(255,255,255,0.55)",
+  fontSize: 12,
+  textTransform: "uppercase",
+  letterSpacing: "0.14em",
+  marginBottom: 8,
+},
+metaInfoValue: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: 700,
+  lineHeight: 1.5,
+},
   page: {
     minHeight: "100vh",
     position: "relative",
