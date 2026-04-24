@@ -111,6 +111,9 @@ const Navbar = () => {
           color: rgba(255,255,255,0.6);
           font-size: 13px;
           white-space: nowrap;
+          max-width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .ss-nav-exit {
@@ -123,6 +126,7 @@ const Navbar = () => {
           background: linear-gradient(135deg, #7c3aed, #06b6d4);
           box-shadow: 0 14px 34px rgba(124,58,237,0.22);
           transition: 0.22s ease;
+          white-space: nowrap;
         }
 
         .ss-nav-exit:hover {
@@ -130,17 +134,78 @@ const Navbar = () => {
         }
 
         @media (max-width: 920px) {
+          .ss-nav-wrap {
+            top: 8px;
+            padding: 10px 12px 0;
+          }
+
           .ss-nav {
-            flex-direction: column;
-            align-items: stretch;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 18px;
+          }
+
+          .ss-brand {
+            font-size: 0;
+            gap: 0;
+          }
+
+          .ss-brand-dot {
+            width: 10px;
+            height: 10px;
           }
 
           .ss-nav-links {
-            justify-content: flex-start;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+          }
+
+          .ss-nav-links::-webkit-scrollbar {
+            display: none;
+          }
+
+          .ss-nav-link {
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            white-space: nowrap;
           }
 
           .ss-nav-right {
-            justify-content: space-between;
+            justify-content: flex-end;
+            gap: 0;
+          }
+
+          .ss-nav-mode {
+            display: none;
+          }
+
+          .ss-nav-exit {
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .ss-nav {
+            gap: 8px;
+          }
+
+          .ss-nav-link {
+            padding: 7px 9px;
+            font-size: 11px;
+          }
+
+          .ss-nav-exit {
+            padding: 7px 9px;
+            font-size: 11px;
           }
         }
       `}</style>
@@ -181,7 +246,7 @@ const Navbar = () => {
             </div>
 
             <button className="ss-nav-exit" onClick={handleExit}>
-              {isGuest ? "Exit Guest" : "Logout"}
+              {isGuest ? "Exit" : "Logout"}
             </button>
           </div>
         </div>
