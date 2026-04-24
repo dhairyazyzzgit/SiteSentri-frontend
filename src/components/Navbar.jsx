@@ -29,6 +29,7 @@ const Navbar = () => {
           top: 14px;
           z-index: 1000;
           padding: 14px 18px 0;
+          transition: 0.28s ease;
         }
 
         .ss-nav {
@@ -46,6 +47,14 @@ const Navbar = () => {
           box-shadow:
             0 18px 46px rgba(0,0,0,0.35),
             inset 0 1px 0 rgba(255,255,255,0.06);
+          transition: 0.28s ease;
+        }
+
+        .ss-nav-wrap:hover .ss-nav {
+          backdrop-filter: blur(22px);
+          box-shadow:
+            0 20px 54px rgba(0,0,0,0.42),
+            inset 0 1px 0 rgba(255,255,255,0.08);
         }
 
         .ss-brand {
@@ -58,6 +67,11 @@ const Navbar = () => {
           font-weight: 800;
           letter-spacing: -0.04em;
           flex-shrink: 0;
+          transition: transform 0.18s ease;
+        }
+
+        .ss-brand:active {
+          transform: scale(0.96);
         }
 
         .ss-brand-dot {
@@ -77,14 +91,30 @@ const Navbar = () => {
         }
 
         .ss-nav-link {
+          position: relative;
           text-decoration: none;
           color: rgba(255,255,255,0.74);
           padding: 11px 16px;
           border-radius: 14px;
           font-weight: 600;
-          transition: 0.22s ease;
+          transition: transform 0.15s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
           border: 1px solid transparent;
           background: transparent;
+        }
+
+        .ss-nav-link::after {
+          content: "";
+          position: absolute;
+          left: 16px;
+          right: 16px;
+          bottom: 6px;
+          height: 2px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, #7c3aed, #06b6d4, #22c55e);
+          transform: scaleX(0);
+          transform-origin: center;
+          opacity: 0;
+          transition: 0.22s ease;
         }
 
         .ss-nav-link:hover {
@@ -98,6 +128,15 @@ const Navbar = () => {
           background: rgba(255,255,255,0.08);
           border-color: rgba(255,255,255,0.08);
           box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .ss-nav-link.active::after {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+
+        .ss-nav-link:active {
+          transform: scale(0.95);
         }
 
         .ss-nav-right {
@@ -125,12 +164,18 @@ const Navbar = () => {
           font-weight: 700;
           background: linear-gradient(135deg, #7c3aed, #06b6d4);
           box-shadow: 0 14px 34px rgba(124,58,237,0.22);
-          transition: 0.22s ease;
+          transition: transform 0.15s ease, box-shadow 0.22s ease, filter 0.22s ease;
           white-space: nowrap;
         }
 
         .ss-nav-exit:hover {
           transform: translateY(-1px);
+          filter: brightness(1.08);
+          box-shadow: 0 16px 40px rgba(124,58,237,0.32);
+        }
+
+        .ss-nav-exit:active {
+          transform: scale(0.95);
         }
 
         @media (max-width: 920px) {
@@ -146,6 +191,13 @@ const Navbar = () => {
             gap: 10px;
             padding: 10px;
             border-radius: 18px;
+            backdrop-filter: blur(20px);
+            transform: scale(0.98);
+            transform-origin: top center;
+          }
+
+          .ss-nav-wrap:hover .ss-nav {
+            transform: scale(0.985);
           }
 
           .ss-brand {
@@ -177,6 +229,13 @@ const Navbar = () => {
             white-space: nowrap;
           }
 
+          .ss-nav-link::after {
+            left: 12px;
+            right: 12px;
+            bottom: 4px;
+            height: 2px;
+          }
+
           .ss-nav-right {
             justify-content: flex-end;
             gap: 0;
@@ -201,6 +260,11 @@ const Navbar = () => {
           .ss-nav-link {
             padding: 7px 9px;
             font-size: 11px;
+          }
+
+          .ss-nav-link::after {
+            left: 10px;
+            right: 10px;
           }
 
           .ss-nav-exit {
